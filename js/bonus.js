@@ -27,7 +27,13 @@ btnPlayDOMElement.addEventListener('click', function () {
 
     getGrid(containerDOMElement, selectedDifficulty)
 
+    // - Generare le bombe tramite la funzione creata
+
+    const numbersOfBomb = getBombs(1, selectedDifficulty, 16)
+    console.log(numbersOfBomb)
+
     // - Richiamare per classe tali elementi    
+
     const gridDOMElements = document.querySelectorAll('.cell')
 
     // - Creare un for che cicli ogni elemento presente nella variabile precedentemente creata e assegnare ad ognuno un numero crescente che sarà uguale all'index del ciclo + 1 e agno ogni elemento aggiungere l'html con il numero rispettivo
@@ -35,6 +41,8 @@ btnPlayDOMElement.addEventListener('click', function () {
     for (let i = 0; i < gridDOMElements.length; i++) {
 
         let cellDOMElement = gridDOMElements[i]
+
+        cellDOMElement.innerHTML = i
 
         if (selectedDifficulty === 81) {
 
@@ -48,10 +56,16 @@ btnPlayDOMElement.addEventListener('click', function () {
         // - Creare un event listener che al click del singolo bottone aggiunga una classe al singolo elemento cliccato e stampi in console l 'html dell'elemento che abbia creato precedentemente
 
         cellDOMElement.addEventListener('click', function () {
-
-            cellDOMElement.classList.add('bg-light-blue')
-
             console.log(cellDOMElement.innerHTML)
+            if (numbersOfBomb.includes(cellDOMElement.innerHTML)) {
+                cellDOMElement.classList.add('bg-red')
+                console.log('BOMBA')
+            }
+
+            else {
+                cellDOMElement.classList.add('bg-light-blue')
+            }
+
         })
 
     }
@@ -76,3 +90,26 @@ function setDifficulty() {
     difficulty = document.getElementById('difficulty-selector').value
 }
 
+function getBombs(rangeMin, rangeMax, numberOfBombs,) {
+
+    bombsArray = []
+
+    while (bombsArray.length < numberOfBombs) {
+
+        numberRandom = getRandomIntInclusive(rangeMin, rangeMax)
+
+        if (!bombsArray.includes(numberRandom)) {
+            bombsArray.push(numberRandom)
+        }
+
+    }
+    console.log(bombsArray)
+    return bombsArray
+}
+
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
