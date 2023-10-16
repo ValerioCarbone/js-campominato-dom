@@ -1,6 +1,7 @@
 // L’utente clicca su un bottone che genererà una griglia di gioco quadrata. Ogni cella ha un numero progressivo, da 1 a 100. Ci saranno quindi 10 caselle per ognuna delle 10 righe. Quando l’utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata.
 // - Creare strutture html( bottone e container)
 // - Richiamare l'elemento html del bottone e assegnargli l'evento click 
+
 const btnPlayDOMElement = document.getElementById('btn-play')
 
 let containerDOMElement = document.querySelector('.container')
@@ -10,6 +11,8 @@ let difficulty = 'easy'
 let selectedDifficulty = 100
 
 btnPlayDOMElement.addEventListener('click', function () {
+
+    containerDOMElement.classList.remove('unclickable')
 
     containerDOMElement.innerHTML = ''
 
@@ -30,7 +33,6 @@ btnPlayDOMElement.addEventListener('click', function () {
     // - Generare le bombe tramite la funzione creata
 
     const numbersOfBomb = getBombs(1, selectedDifficulty, 16)
-    console.log(numbersOfBomb)
 
     // - Richiamare per classe tali elementi    
 
@@ -38,11 +40,11 @@ btnPlayDOMElement.addEventListener('click', function () {
 
     // - Creare un for che cicli ogni elemento presente nella variabile precedentemente creata e assegnare ad ognuno un numero crescente che sarà uguale all'index del ciclo + 1 e agno ogni elemento aggiungere l'html con il numero rispettivo
 
+    const pointsArray = []
+
     for (let i = 0; i < gridDOMElements.length; i++) {
 
         let cellDOMElement = gridDOMElements[i]
-
-        cellDOMElement.innerHTML = i
 
         if (selectedDifficulty === 81) {
 
@@ -53,18 +55,47 @@ btnPlayDOMElement.addEventListener('click', function () {
             cellDOMElement.classList.replace('cell', 'small-grid')
         }
 
+        if (numbersOfBomb.includes(parseInt(cellDOMElement.innerHTML))) {
+
+            cellDOMElement.classList.add('bomb')
+        }
+
         // - Creare un event listener che al click del singolo bottone aggiunga una classe al singolo elemento cliccato e stampi in console l 'html dell'elemento che abbia creato precedentemente
 
         cellDOMElement.addEventListener('click', function () {
-            console.log(cellDOMElement.innerHTML)
-            if (numbersOfBomb.includes(parseInt(cellDOMElement.innerHTML))) {
-                cellDOMElement.classList.add('bg-red')
-                console.log('BOMBA')
+
+
+            if (numbersOfBomb.includes(parseInt(this.innerHTML))) {
+                
+                const cellsBombsDOMElement = document.querySelectorAll('.bomb')
+                
+                for (let i = 0; i < 16; i++){
+                    let currentCellsBombsDOMElement = cellsBombsDOMElement[i]
+                    currentCellsBombsDOMElement.classList.add('bg-red')
+                }
+
+                containerDOMElement.classList.add('unclickable')
+
+                alert(`Hai perso! Il tuo punteggio è ${pointsArray.length}!`)
+
             }
+            
+            else if (pointsArray.length === (parseInt(selectedDifficulty) - 16)) {
+                alert(`Hai vinto! Il tuo punteggio è ${pointsArray.length}!`)
+            }
+
 
             else {
                 cellDOMElement.classList.add('bg-light-blue')
+
+                if (!pointsArray.includes(this.innerHTML)) {
+
+                    pointsArray.push(this.innerHTML)
+                }
             }
+
+
+
 
         })
 
