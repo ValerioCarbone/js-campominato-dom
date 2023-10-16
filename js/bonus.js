@@ -57,7 +57,7 @@ btnPlayDOMElement.addEventListener('click', function () {
 
         cellDOMElement.addEventListener('click', function () {
             console.log(cellDOMElement.innerHTML)
-            if (numbersOfBomb.includes(cellDOMElement.innerHTML)) {
+            if (numbersOfBomb.includes(parseInt(cellDOMElement.innerHTML))) {
                 cellDOMElement.classList.add('bg-red')
                 console.log('BOMBA')
             }
