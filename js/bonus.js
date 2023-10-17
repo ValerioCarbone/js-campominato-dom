@@ -74,7 +74,9 @@ btnPlayDOMElement.addEventListener('click', function () {
                 const cellsBombsDOMElement = document.querySelectorAll('.bomb')
                 
                 for (let i = 0; i < 16; i++){
+                    
                     let currentCellsBombsDOMElement = cellsBombsDOMElement[i]
+                    
                     currentCellsBombsDOMElement.classList.add('bg-red')
                 }
 
@@ -87,7 +89,10 @@ btnPlayDOMElement.addEventListener('click', function () {
             else {
                 cellDOMElement.classList.add('bg-light-blue')
 
-                if (pointsArray.length === victoryPoints){
+                if (pointsArray.length === parseInt(victoryPoints)){
+
+                    containerDOMElement.classList.add('unclickable')
+
                     alert(`Hai vinto! Il tuo punteggio è ${pointsArray.length}!`)
                 }
 
