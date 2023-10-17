@@ -37,6 +37,7 @@ btnPlayDOMElement.addEventListener('click', function () {
     // - Generare le bombe tramite la funzione creata
 
     const numbersOfBomb = getBombs(1, selectedDifficulty, 16)
+    console.log(numbersOfBomb)
 
     // - Richiamare per classe tali elementi    
 
