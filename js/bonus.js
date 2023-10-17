@@ -16,7 +16,7 @@ btnPlayDOMElement.addEventListener('click', function () {
 
     containerDOMElement.innerHTML = ''
 
-    
+
 
     if (difficulty === 'easy') {
         selectedDifficulty = 100
@@ -27,7 +27,7 @@ btnPlayDOMElement.addEventListener('click', function () {
     else if (difficulty === 'hard') {
         selectedDifficulty = 49
     }
-    
+
     let victoryPoints = parseInt(selectedDifficulty - 16)
 
     // - Creare una funzione con un ciclo for che generi una griglia    
@@ -68,15 +68,14 @@ btnPlayDOMElement.addEventListener('click', function () {
 
         cellDOMElement.addEventListener('click', function () {
 
-
             if (numbersOfBomb.includes(parseInt(this.innerHTML))) {
-                
+
                 const cellsBombsDOMElement = document.querySelectorAll('.bomb')
-                
-                for (let i = 0; i < 16; i++){
-                    
+
+                for (let i = 0; i < 16; i++) {
+
                     let currentCellsBombsDOMElement = cellsBombsDOMElement[i]
-                    
+
                     currentCellsBombsDOMElement.classList.add('bg-red')
                 }
 
@@ -85,11 +84,11 @@ btnPlayDOMElement.addEventListener('click', function () {
                 alert(`Hai perso! Il tuo punteggio è ${pointsArray.length}!`)
 
             }
-          
+
             else {
                 cellDOMElement.classList.add('bg-light-blue')
 
-                if (pointsArray.length === parseInt(victoryPoints)){
+                if (pointsArray.length === parseInt(victoryPoints)) {
 
                     containerDOMElement.classList.add('unclickable')
 
