@@ -91,7 +91,7 @@ btnPlayDOMElement.addEventListener('click', function () {
 
                     pointsArray.push(this.innerHTML)
 
-                    cellDOMElement.classList.add('bg-light-blue')
+                    this.classList.add('bg-light-blue', 'unclickable')
 
                 }
 
