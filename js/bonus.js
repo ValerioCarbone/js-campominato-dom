@@ -142,7 +142,6 @@ function getBombs(rangeMin, rangeMax, numberOfBombs,) {
         }
 
     }
-    console.log(bombsArray)
     return bombsArray
 }
 
