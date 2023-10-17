@@ -86,7 +86,14 @@ btnPlayDOMElement.addEventListener('click', function () {
             }
 
             else {
-                cellDOMElement.classList.add('bg-light-blue')
+
+                if (!pointsArray.includes(this.innerHTML)) {
+
+                    pointsArray.push(this.innerHTML)
+
+                    cellDOMElement.classList.add('bg-light-blue')
+
+                }
 
                 if (pointsArray.length === parseInt(victoryPoints)) {
 
@@ -94,11 +101,7 @@ btnPlayDOMElement.addEventListener('click', function () {
 
                     alert(`Hai vinto! Il tuo punteggio è ${pointsArray.length}!`)
                 }
-
-                else if (!pointsArray.includes(this.innerHTML)) {
-
-                    pointsArray.push(this.innerHTML)
-                }
+    
             }
 
 
